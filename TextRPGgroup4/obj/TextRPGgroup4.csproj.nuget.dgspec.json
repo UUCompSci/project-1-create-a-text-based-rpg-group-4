@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jonat\\Desktop\\Stuff\\CSC255 Stuff\\project-1-create-a-text-based-rpg-group-4\\TextRPGgroup4\\TextRPGgroup4.csproj": {}
+    "/Users/williamtrittvenable/Documents/GitHub/project-1-create-a-text-based-rpg-group-4/TextRPGgroup4/TextRPGgroup4.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jonat\\Desktop\\Stuff\\CSC255 Stuff\\project-1-create-a-text-based-rpg-group-4\\TextRPGgroup4\\TextRPGgroup4.csproj": {
+    "/Users/williamtrittvenable/Documents/GitHub/project-1-create-a-text-based-rpg-group-4/TextRPGgroup4/TextRPGgroup4.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jonat\\Desktop\\Stuff\\CSC255 Stuff\\project-1-create-a-text-based-rpg-group-4\\TextRPGgroup4\\TextRPGgroup4.csproj",
+        "projectUniqueName": "/Users/williamtrittvenable/Documents/GitHub/project-1-create-a-text-based-rpg-group-4/TextRPGgroup4/TextRPGgroup4.csproj",
         "projectName": "TextRPGgroup4",
-        "projectPath": "C:\\Users\\jonat\\Desktop\\Stuff\\CSC255 Stuff\\project-1-create-a-text-based-rpg-group-4\\TextRPGgroup4\\TextRPGgroup4.csproj",
-        "packagesPath": "C:\\Users\\jonat\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jonat\\Desktop\\Stuff\\CSC255 Stuff\\project-1-create-a-text-based-rpg-group-4\\TextRPGgroup4\\obj\\",
+        "projectPath": "/Users/williamtrittvenable/Documents/GitHub/project-1-create-a-text-based-rpg-group-4/TextRPGgroup4/TextRPGgroup4.csproj",
+        "packagesPath": "/Users/williamtrittvenable/.nuget/packages/",
+        "outputPath": "/Users/williamtrittvenable/Documents/GitHub/project-1-create-a-text-based-rpg-group-4/TextRPGgroup4/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\jonat\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/williamtrittvenable/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -59,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
