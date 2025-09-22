@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+
+// Will commented. 
 class Program
 {
     // These are the game state variables 
@@ -8,7 +10,8 @@ class Program
     static int gold = 50; // player's gold
     static List<string> inventory = new List<string>(); // players items
 
-    static void Main(string[] args) {
+    static void Main(string[] args)
+    {
         // These are the command line arguments to set initial state of the game
         try
         {
@@ -25,7 +28,8 @@ class Program
             hitpoints, gold, string.Join(", ", inventory));
 
         bool playing = true;// this is the main game loop
-        while (playing) { // These are the different scenes the player can go to. // the main menu options
+        while (playing)
+        { // These are the different scenes the player can go to. // the main menu options
             Console.WriteLine("\nWhere would you like to go?");
             Console.WriteLine("1. Town");
             Console.WriteLine("2. Cave");
@@ -35,7 +39,8 @@ class Program
             Console.WriteLine("6. View Status");
             Console.WriteLine("7. Exit");
 
-            try {
+            try
+            {
                 int choice = int.Parse(Console.ReadLine());
                 switch (choice)
                 {
@@ -61,8 +66,9 @@ class Program
             }
         }
     }
-// this is the town scene
-    static void Town() {
+    // this is the town scene
+    static void Town()
+    {
         Console.WriteLine("\nYou are in the town. The market is busy.");
         Console.WriteLine("1. Buy potion (-10 gold, +20 HP)");
         Console.WriteLine("2. Rest at inn (-5 gold, +10 HP)");
@@ -101,8 +107,9 @@ class Program
             Console.WriteLine("Invalid input.");
         }
     }
-// this is the cave scene
-    static void Cave() {
+    // this is the cave scene
+    static void Cave()
+    {
         Console.WriteLine("\nYou venture into the dark cave.");
         Console.WriteLine("You encounter a monster!");
 
@@ -130,8 +137,9 @@ class Program
             Console.WriteLine("You hesitated and fled.");
         }
     }
-// this is the road scene 
-    static void Road() {
+    // this is the road scene 
+    static void Road()
+    {
         Console.WriteLine("\nYou walk along the road and find a chest.");
         Console.WriteLine("1. Open the chest");
         Console.WriteLine("2. Ignore and walk away");
@@ -154,8 +162,9 @@ class Program
             Console.WriteLine("Invalid choice, you walk away.");
         }
     }
-// castle scene
-    static void Castle() {
+    // castle scene
+    static void Castle()
+    {
         Console.WriteLine("\nYou arrive at the castle gates.");
         Console.WriteLine("1. Speak with the guard");
         Console.WriteLine("2. Try to sneak inside");
@@ -191,8 +200,9 @@ class Program
             Console.WriteLine("Invalid input.");
         }
     }
-// this is the dungeon scene
-    static void Dungeon() {
+    // this is the dungeon scene
+    static void Dungeon()
+    {
         Console.WriteLine("\nYou enter the dark Dungeon.");
         Console.WriteLine("1. Explore deeper");
         Console.WriteLine("2. Search for valuables");
@@ -209,7 +219,7 @@ class Program
                     break;
                 case 2:
                     Random rnd = new Random();
-                    string[] junk = { "Old Tablet", "Broken Dagger", "Old Boot", "Rusty Key", "Torn Cloth", "Faded Map", "Steel Greatsword"};
+                    string[] junk = { "Old Tablet", "Broken Dagger", "Old Boot", "Rusty Key", "Torn Cloth", "Faded Map", "Steel Greatsword" };
                     string found = junk[rnd.Next(junk.Length)];
                     inventory.Add(found);
                     Console.WriteLine("You find a {0}!", found);
