@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+// Jonathan commented here
+
 class Program
 {
     // These are the game state variables 
