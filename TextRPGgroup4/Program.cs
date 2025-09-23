@@ -36,7 +36,7 @@ class Program
         }
 
         // Start of the game / starting setup
-        string startingItem = "no items.";
+        string startingItem = "no items";
         if (args.Length > 1)
         {
             startingItem = inventory[0];
@@ -373,14 +373,19 @@ class Program
 
         switch (found) // determine effects of special items
         {
+            case "Silver Card":
+                WriteLine("Defense increased by 5!");
+                defensePower += 5;
+                break;
+
             case "Twisted Sword":
                 WriteLine(" Attack increased by 15!");
                 attackPower += 15;
                 break;
 
             case "White Ribbon":
-                WriteLine(" Defense increased by 5!");
-                defensePower += 5;
+                WriteLine(" Defense increased by 10!");
+                defensePower += 10;
                 break;
 
             default: // no special item
