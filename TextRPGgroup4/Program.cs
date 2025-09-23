@@ -359,7 +359,7 @@ class Program
         // get a random item
         Random randomItem = new Random();
 
-        string[] possibleItems = { "Dark Candy, Dark Candy, Dark Candy, Silver Card, Silver Card, Ball of Junk, Twisted Sword, White Ribbon, White Ribbon" };
+        string[] possibleItems = new string[] { "Dark Candy", "Dark Candy", "Dark Candy", "Silver Card", "Silver Card", "Ball of Junk", "Twisted Sword", "White Ribbon", "White Ribbon" };
         string found = possibleItems[randomItem.Next(0, possibleItems.Length)]; // the random item
         inventory.Add(found); // add to inventory
 
@@ -367,7 +367,7 @@ class Program
 
         switch (found) // determine effects of special items
         {
-            case "Twised Sword":
+            case "Twisted Sword":
                 WriteLine(" Attack increased by 15!");
                 attackPower += 15;
                 break;
