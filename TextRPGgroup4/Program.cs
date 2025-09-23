@@ -205,11 +205,6 @@ class Program
 
             try // MAIN FIGHT LOGIC
             {
-                if (hitpoints <= 0) // stop fight if you die
-                {
-                    areFighting = false;
-                }
-
                 switch (GetChoice())
                 {
                     case 1: // You fight!
@@ -290,6 +285,11 @@ class Program
                 {
                     WriteLine();
                     hitpoints -= SomebodyAttacks(20, 55 - defensePower, "CLOVER", "YOU");
+                }
+
+                if (hitpoints <= 0) // stop fight if you die
+                {
+                    areFighting = false;
                 }
             }
             catch
