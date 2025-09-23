@@ -36,9 +36,15 @@ class Program
         }
 
         // Start of the game / starting setup
+        string startingItem = "no items.";
+        if (args.Length > 1)
+        {
+            startingItem = inventory[0];
+        }
+
         WriteLine("Welcome to the Dark World!");
-        WriteLine("You've entered with {0} HP, {1} gold, and any debug items: {2}",
-            hitpoints, gold, string.Join(", ", inventory));
+        WriteLine("You've entered with {0} HP, {1} gold, and {2}.",
+            hitpoints, gold, startingItem);
 
 
 
