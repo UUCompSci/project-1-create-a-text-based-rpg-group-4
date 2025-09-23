@@ -374,7 +374,7 @@ class Program
         switch (found) // determine effects of special items
         {
             case "Silver Card":
-                WriteLine("Defense increased by 5!");
+                WriteLine(" Defense increased by 5!");
                 defensePower += 5;
                 break;
 
