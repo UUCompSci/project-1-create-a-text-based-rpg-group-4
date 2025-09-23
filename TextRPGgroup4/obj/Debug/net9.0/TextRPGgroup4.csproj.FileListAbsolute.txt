@@ -1,0 +1,15 @@
+C:\Users\jonat\Desktop\Stuff\CSC255 Stuff\project-1-create-a-text-based-rpg-group-4\TextRPGgroup4\bin\Debug\net9.0\TextRPGgroup4.exe
+C:\Users\jonat\Desktop\Stuff\CSC255 Stuff\project-1-create-a-text-based-rpg-group-4\TextRPGgroup4\bin\Debug\net9.0\TextRPGgroup4.deps.json
+C:\Users\jonat\Desktop\Stuff\CSC255 Stuff\project-1-create-a-text-based-rpg-group-4\TextRPGgroup4\bin\Debug\net9.0\TextRPGgroup4.runtimeconfig.json
+C:\Users\jonat\Desktop\Stuff\CSC255 Stuff\project-1-create-a-text-based-rpg-group-4\TextRPGgroup4\bin\Debug\net9.0\TextRPGgroup4.dll
+C:\Users\jonat\Desktop\Stuff\CSC255 Stuff\project-1-create-a-text-based-rpg-group-4\TextRPGgroup4\bin\Debug\net9.0\TextRPGgroup4.pdb
+C:\Users\jonat\Desktop\Stuff\CSC255 Stuff\project-1-create-a-text-based-rpg-group-4\TextRPGgroup4\obj\Debug\net9.0\TextRPGgroup4.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jonat\Desktop\Stuff\CSC255 Stuff\project-1-create-a-text-based-rpg-group-4\TextRPGgroup4\obj\Debug\net9.0\TextRPGgroup4.AssemblyInfoInputs.cache
+C:\Users\jonat\Desktop\Stuff\CSC255 Stuff\project-1-create-a-text-based-rpg-group-4\TextRPGgroup4\obj\Debug\net9.0\TextRPGgroup4.AssemblyInfo.cs
+C:\Users\jonat\Desktop\Stuff\CSC255 Stuff\project-1-create-a-text-based-rpg-group-4\TextRPGgroup4\obj\Debug\net9.0\TextRPGgroup4.csproj.CoreCompileInputs.cache
+C:\Users\jonat\Desktop\Stuff\CSC255 Stuff\project-1-create-a-text-based-rpg-group-4\TextRPGgroup4\obj\Debug\net9.0\TextRPGgroup4.sourcelink.json
+C:\Users\jonat\Desktop\Stuff\CSC255 Stuff\project-1-create-a-text-based-rpg-group-4\TextRPGgroup4\obj\Debug\net9.0\TextRPGgroup4.dll
+C:\Users\jonat\Desktop\Stuff\CSC255 Stuff\project-1-create-a-text-based-rpg-group-4\TextRPGgroup4\obj\Debug\net9.0\refint\TextRPGgroup4.dll
+C:\Users\jonat\Desktop\Stuff\CSC255 Stuff\project-1-create-a-text-based-rpg-group-4\TextRPGgroup4\obj\Debug\net9.0\TextRPGgroup4.pdb
+C:\Users\jonat\Desktop\Stuff\CSC255 Stuff\project-1-create-a-text-based-rpg-group-4\TextRPGgroup4\obj\Debug\net9.0\TextRPGgroup4.genruntimeconfig.cache
+C:\Users\jonat\Desktop\Stuff\CSC255 Stuff\project-1-create-a-text-based-rpg-group-4\TextRPGgroup4\obj\Debug\net9.0\ref\TextRPGgroup4.dll

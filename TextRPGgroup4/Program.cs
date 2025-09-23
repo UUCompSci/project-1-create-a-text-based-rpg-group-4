@@ -1,15 +1,25 @@
-﻿using System;
+﻿// Project 1: Create a Text-Based RPG
+// by Jonathan Hudlow and William Venable
+
+
+
+////////////////
+// GAME SETUP //
+////////////////
+
+using System;
+using static System.Console;
 using System.Collections.Generic;
+using System.ComponentModel;
 
-// Jonathan commented here
-
-
-// Will commented. 
 class Program
 {
-    // These are the game state variables 
-    static int hitpoints = 100; // player's health
+    // These are the game state variables
+    static int hitpoints = 120; // player's health
+    static int maxHealth = 120; // maximum value player's health can be
     static int gold = 50; // player's gold
+    static int attackPower = 5; // attack power of player's weapon
+    static int defensePower = 5; // defense power of player's armor
     static List<string> inventory = new List<string>(); // players items
 
     static void Main(string[] args)
@@ -22,233 +32,375 @@ class Program
         }
         catch
         {
-            Console.WriteLine("Invalid command line arguments. Using defaults.");
+            WriteLine("Invalid command line arguments. Using defaults.");
         }
 
-        Console.WriteLine("Start Game!!!");
-        Console.WriteLine("Starting with {0} HP, {1} gold, and items: {2}",
+        // Start of the game / starting setup
+        WriteLine("Welcome to the Dark World!");
+        WriteLine("You've entered with {0} HP, {1} gold, and any debug items: {2}",
             hitpoints, gold, string.Join(", ", inventory));
 
-        bool playing = true;// this is the main game loop
+
+
+        ///////////////
+        // MAIN LOOP //
+        ///////////////
+
+        bool playing = true; // this is the main game loop
         while (playing)
+
         { // These are the different scenes the player can go to. // the main menu options
-            Console.WriteLine("\nWhere would you like to go?");
-            Console.WriteLine("1. Town");
-            Console.WriteLine("2. Cave");
-            Console.WriteLine("3. Road");
-            Console.WriteLine("4. Castle");
-            Console.WriteLine("5. Dungeon");
-            Console.WriteLine("6. View Status");
-            Console.WriteLine("7. Exit");
+            WriteLine("\nWhat would you like to do?");
+            WriteLine("1. Talk to your friends.");
+            WriteLine("2. Visit the Dojo."); 
+            WriteLine("3. Visit the Shop.");
+            WriteLine("4. Visit the Castle");
+            WriteLine("5. Investigate outside of town.");
+            WriteLine("6. View Status");
+            WriteLine("7. Leave the Dark World.");
 
             try
             {
-                int choice = int.Parse(Console.ReadLine());
-                switch (choice)
+                switch (GetChoice())
                 {
-                    case 1: Town(); break;
-                    case 2: Cave(); break;
-                    case 3: Road(); break;
+                    case 1: TalkToFriends(); break;
+                    case 2: VisitDojo(); break;
+                    case 3: VisitShop(); break;
                     case 4: Castle(); break;
-                    case 5: Dungeon(); break;
+                    case 5: Explore(); break;
                     case 6: ViewStatus(); break;
                     case 7: playing = false; break;
-                    default: Console.WriteLine("Invalid choice."); break;
+                    default: WriteLine("Invalid choice."); break;
                 }
             }
             catch
             {
-                Console.WriteLine("Please enter a valid number.");
+                WriteLine("Please enter a valid choice.");
             }
 
             if (hitpoints <= 0) // this checks if the player is dead
             {
-                Console.WriteLine("You Died.");
+                WriteLine("Your heart shatters...GAME OVER.");
                 playing = false;
             }
         }
     }
-    // this is the town scene
-    static void Town()
-    {
-        Console.WriteLine("\nYou are in the town. The market is busy.");
-        Console.WriteLine("1. Buy potion (-10 gold, +20 HP)");
-        Console.WriteLine("2. Rest at inn (-5 gold, +10 HP)");
-        Console.WriteLine("3. Return to main menu");
 
-        try
-        {
-            int choice = int.Parse(Console.ReadLine());
-            switch (choice)
-            {
-                case 1:
-                    if (gold >= 10)
-                    {
-                        gold -= 10;
-                        hitpoints += 20;
-                        inventory.Add("Potion");
-                        Console.WriteLine("You bought a potion.");
-                    }
-                    else Console.WriteLine("Get more gold.");
-                    break;
-                case 2:
-                    if (gold >= 5)
-                    {
-                        gold -= 5;
-                        hitpoints += 10;
-                        Console.WriteLine("You rested at the inn.");
-                    }
-                    else Console.WriteLine("Get more gold.");
-                    break;
-                case 3: return; // this goes back to the main menu
-                default: Console.WriteLine("Invalid choice."); break;
-            }
-        }
-        catch
-        {
-            Console.WriteLine("Invalid input.");
-        }
+    ///////////////////////////
+    // CONVENIENCE FUNCTIONS //
+    ///////////////////////////
+
+    static int GetChoice() // get's player-input
+    {
+        return int.Parse(ReadLine());
     }
-    // this is the cave scene
-    static void Cave()
-    {
-        Console.WriteLine("\nYou venture into the dark cave.");
-        Console.WriteLine("You encounter a monster!");
 
+    static int SomebodyAttacks(int damageMin, int damageMax, string personOne, string personTwo) // easily handles an attack
+    {
+        // The numbers behind the attack
         Random rnd = new Random();
-        int damage = rnd.Next(5, 20);
-        hitpoints -= damage;
-        Console.WriteLine("The monster attacks you for {0} damage!", damage);
+        int damage = rnd.Next(damageMin, damageMax);
 
-        Console.WriteLine("1. Fight back");
-        Console.WriteLine("2. Flee");
+        // The text behind the attack
+        WriteLine($"{personOne} did {damage} damage to {personTwo}!");
 
-        try
-        {
-            int choice = int.Parse(Console.ReadLine());
-            if (choice == 1)
-            {
-                int loot = rnd.Next(5, 15); // the amount of gold from defeating the monster
-                gold += loot;
-                Console.WriteLine("You defeat the monster and gain {0} gold!", loot);
-            }
-            else Console.WriteLine("You flee.");
-        }
-        catch
-        {
-            Console.WriteLine("You hesitated and fled.");
-        }
-    }
-    // this is the road scene 
-    static void Road()
-    {
-        Console.WriteLine("\nYou walk along the road and find a chest.");
-        Console.WriteLine("1. Open the chest");
-        Console.WriteLine("2. Ignore and walk away");
-
-        try
-        {
-            int choice = int.Parse(Console.ReadLine());
-            if (choice == 1)
-            {
-                string[] treasures = { "Sword", "Shield", "Gem", "Map", "Ring", "Amulet", "Helmet", "Boots" }; // these are the possible treasures
-                Random rnd = new Random();
-                string found = treasures[rnd.Next(treasures.Length)];
-                inventory.Add(found);
-                Console.WriteLine("You found a {0}!", found);
-            }
-            else Console.WriteLine("You continue on your journey.");
-        }
-        catch
-        {
-            Console.WriteLine("Invalid choice, you walk away.");
-        }
-    }
-    // castle scene
-    static void Castle()
-    {
-        Console.WriteLine("\nYou arrive at the castle gates.");
-        Console.WriteLine("1. Speak with the guard");
-        Console.WriteLine("2. Try to sneak inside");
-        Console.WriteLine("3. Return to main menu");
-
-        try
-        {
-            int choice = int.Parse(Console.ReadLine());
-            switch (choice)
-            {
-                case 1:
-                    Console.WriteLine("The guard tells you rumors of treasure in the dungeon.");
-                    break;
-                case 2:
-                    Random rnd = new Random();
-                    if (rnd.Next(0, 2) == 0)
-                    {
-                        Console.WriteLine("You sneak inside and find 20 gold!");
-                        gold += 20;
-                    }
-                    else
-                    {
-                        Console.WriteLine("You are caught and lose 10 HP.");
-                        hitpoints -= 10;
-                    }
-                    break;
-                case 3: return;
-                default: Console.WriteLine("Invalid choice."); break;
-            }
-        }
-        catch
-        {
-            Console.WriteLine("Invalid input.");
-        }
-    }
-    // this is the dungeon scene
-    static void Dungeon()
-    {
-        Console.WriteLine("\nYou enter the dark Dungeon.");
-        Console.WriteLine("1. Explore deeper");
-        Console.WriteLine("2. Search for valuables");
-        Console.WriteLine("3. Return to main menu");
-
-        try
-        {
-            int choice = int.Parse(Console.ReadLine());
-            switch (choice)
-            {
-                case 1:
-                    Console.WriteLine("You fight a skeleton and lose 15 HP.");
-                    hitpoints -= 15;
-                    break;
-                case 2:
-                    Random rnd = new Random();
-                    string[] junk = { "Old Tablet", "Broken Dagger", "Old Boot", "Rusty Key", "Torn Cloth", "Faded Map", "Steel Greatsword" };
-                    string found = junk[rnd.Next(junk.Length)];
-                    inventory.Add(found);
-                    Console.WriteLine("You find a {0}!", found);
-                    break;
-                case 3: return;
-                default: Console.WriteLine("Invalid choice."); break;
-            }
-        }
-        catch
-        {
-            Console.WriteLine("Invalid input.");
-        }
+        // Return the damage done
+        return damage;
     }
 
-    static void ViewStatus() // this views the player's current status
+    static void BuyItem(string item, int price)
     {
-        Console.WriteLine("\n--- Status ---");
-        Console.WriteLine("Hitpoints: {0}", hitpoints);
-        Console.WriteLine("Gold: {0}", gold);
-
-        if (inventory.Count == 0) Console.WriteLine("Inventory: (empty)");
+        if (gold >= price)
+        {
+            gold -= price;
+            inventory.Add(item);
+            WriteLine("SEAM: Thank you, traveller!");
+        }
         else
         {
-            Console.WriteLine("Inventory:");
+            WriteLine("SEAM: Sorry, traveller, you don't possess enough gold for that");
+        }
+    }
+
+
+    /////////////////////
+    // SCENE FUNCTIONS //
+    /////////////////////
+
+    static void TalkToFriends() // Talking to your friends
+    {
+        bool isTalking = true;
+        while (isTalking)
+        {
+            WriteLine("\nWho would you like to talk to?");
+            WriteLine("1. Susie.");
+            WriteLine("2. Ralsei.");
+            WriteLine("3. Lancer.");
+            WriteLine("4. Rouxls Kaard.");
+            WriteLine("5. Return to Town Center.");
+
+            try
+            {
+                switch (GetChoice())
+                {
+                    case 1: // talk to Susie
+                        WriteLine("SUSIE: Heck yeah! Great to be back in the Dark World, ey, Kris?");
+                        WriteLine("SUSIE: Though, maybe we should be working on that group project...");
+                        WriteLine("SUSIE: Or, rather, YOU'LL work on the project, and I'll watch! HA!");
+                        break;
+
+                    case 2: // talk to Ralsei
+                        WriteLine("RALSEI: Kris! Susie! I'm so glad you guys are here!");
+                        WriteLine("RALSEI: There don't seem to be any looming Dark Fountains right now, but I'll be ready to help you guys if there is!");
+                        WriteLine("RALSEI: In the mean time, I could bake you guys a cake! Go to the Castle, and I'll give it to you!");
+                        break;
+
+                    case 3: // talk to Lancer
+                        WriteLine("LANCER: Susie! Blue person who I know the name of! Welcome back to my kingdom!");
+                        WriteLine("RALSEI: Uh, Lancer, don't forget that I'M the Prince of this world!");
+                        WriteLine("LANCER: Quiet, Toothpaste Boy!");
+                        WriteLine();
+                        WriteLine("Susie and Lancer proceed to laugh.");
+                        WriteLine();
+                        WriteLine("RALSEI: -_-");
+                        break;
+
+                    case 4: // "talk" to Rouxls Kaard
+                        WriteLine("ROUXLS KAARD: Greetings, lowly worms! Have thoust come to take another cracketh at mineth puzzles?");
+                        WriteLine("...");
+                        WriteLine("You decided not to talk to Rouxls Kaard anymore.");
+                        break;
+
+                    default: // return to scene selection
+                        isTalking = false;
+                        break;
+                }
+            }
+            catch
+            {
+                WriteLine("Please enter a valid choice.");
+            }
+        }
+    }
+
+    static void VisitDojo() // Challenge Clover at the Dojo!
+    {
+        WriteLine("\nYou enter the dojo...and Clover, the three headed, horned beast challenges you!");
+        WriteLine();
+        WriteLine("CLOVER:");
+        WriteLine("Hiya friends! Let's have a friendly match~");
+        WriteLine("We're going to PUMMEL YOU!");
+        WriteLine("Uh, good luck have fun?");
+
+        int cloverHealth = 150; // initialize Clover's health
+
+        bool areFighting = true;
+        while (areFighting)
+        {
+            WriteLine();
+            WriteLine("1. Fight");
+            WriteLine("2. Act");
+            WriteLine("3. Item");
+            WriteLine("4. Flee");
+
+            try // MAIN FIGHT LOGIC
+            {
+                if (hitpoints <= 0) // stop fight if you die
+                {
+                    areFighting = false;
+                }
+
+                switch (GetChoice())
+                {
+                    case 1: // You fight!
+                        cloverHealth -= SomebodyAttacks(25 + attackPower, 65 + attackPower, "KRIS", "CLOVER");
+
+                        if (cloverHealth <= 0) // you won, but by killing them
+                        {
+                            WriteLine("CLOVER turns to dust...");
+                            WriteLine("You won! Got 30 Gold and 1 Dark Candy!");
+
+                            gold += 30;
+                            inventory.Add("Dark Candy");
+
+                            areFighting = false;
+                            break;
+                        }
+                        else // the fight goes on
+                        {
+                            break;
+                        }
+
+                    case 2: // You act
+                        Random randomAction = new Random();
+                        int action = randomAction.Next(1, 4);
+
+                        switch (action)
+                        {
+                            case 1:
+                                WriteLine("You talk about CLOVER's birthday. It seems they would rather talk about something else.");
+                                break;
+
+                            case 2:
+                                WriteLine("You talk about sports with CLOVER. They seem to kind of like that, but not enough to stop fighting.");
+                                break;
+
+                            case 3:
+                                WriteLine("You talk about cute boys with CLOVER. They seem to love that!");
+                                WriteLine("CLOVER doesn't want to fight anymore!");
+                                WriteLine("You won! Got 130 Gold and 3 Dark Candy!");
+
+                                gold += 130;
+                                inventory.Add("Dark Candy");
+                                inventory.Add("Dark Candy");
+                                inventory.Add("Dark Candy");
+
+                                areFighting = false;
+                                break;
+
+                            default:
+                                WriteLine("You talk about the default option in switch statements. Wait, what?");
+                                break;
+                        }
+                        break;
+
+                    case 3: // use an item
+                        if (inventory.Contains("Dark Candy"))
+                        {
+                            WriteLine("You used Dark Candy and healed 50 HP!");
+                            hitpoints += 50;
+                            inventory.Remove("Dark Candy");
+                            break;
+                        }
+                        else
+                        {
+                            WriteLine("You have no proper usuable items!");
+                            break;
+                        }
+
+                    default: // fled the Dojo
+                        WriteLine("You fled the Dojo!");
+                        areFighting = false;
+                        break;
+                }
+
+                // unless you won or fled, Clover will attack you!
+                // (Unlike attackPower increasing both min/max values for an attack, defensePower doesn't affect the min value so CLOVER at least does 10 HP)
+                if (areFighting)
+                {
+                    WriteLine();
+                    hitpoints -= SomebodyAttacks(20, 55 - defensePower, "CLOVER", "YOU");
+                }
+            }
+            catch
+            {
+                WriteLine("Please enter a valid choice.");
+            }
+        }
+    }
+
+    static void VisitShop() // Visiting the shop
+    {
+        WriteLine("SEAM: Welcome, travellers, to my humble shop. I am SEAM, prounounced SHAWM.");
+        WriteLine("\nWhat would you like to buy?");
+
+        bool browsingShop = true;
+        while (browsingShop)
+        {
+            WriteLine();
+            WriteLine("1. Dark Candy - 25 Gold.");
+            WriteLine("2. Spookysword - Raises attack power by 10 - 100 Gold.");
+            WriteLine("3. Silver Card - Raises defense power by 10 - 100 Gold.");
+            WriteLine("4. Leave Shop - 0 Gold.");
+
+            try
+            {
+                switch (GetChoice())
+                {
+                    case 1: // buy dark candy
+                        BuyItem("Dark Candy", 25);
+                        break;
+
+                    case 2: // buy sword
+                        BuyItem("Spookysword", 100);
+                        break;
+
+                    case 3: // buy armor
+                        BuyItem("Silver Card", 100);
+                        break;
+
+                    default: // leave
+                        browsingShop = false;
+                        break;
+                }
+            }
+            catch
+            {
+                WriteLine("Please enter a valid choice.");
+            }
+        }
+    }
+
+    static void Castle() // Castle scene
+    {
+        WriteLine("\nYou enter the Castle...");
+        WriteLine("RALSEI: Welcome! You made it just in time - I baked a cake for you!");
+        WriteLine("RALSEI: It's chocolate, your favorite!");
+        WriteLine();
+        WriteLine("You eat the Chocolate Cake...Your health is restored!");
+
+        hitpoints = maxHealth;
+    }
+
+    static void Explore() // Exploring outside of town
+    {
+        WriteLine("\nYou explore the outside of town; the dusty cliffsides and around the grand door...");
+
+        // get a random item
+        Random randomItem = new Random();
+
+        string[] possibleItems = { "Dark Candy, Dark Candy, Dark Candy, Silver Card, Silver Card, Ball of Junk, Twisted Sword, White Ribbon, White Ribbon" };
+        string found = possibleItems[randomItem.Next(0, possibleItems.Length)]; // the random item
+        inventory.Add(found); // add to inventory
+
+        Write($"You found a {found}!"); // initial collection message
+
+        switch (found) // determine effects of special items
+        {
+            case "Twised Sword":
+                WriteLine(" Attack increased by 15!");
+                attackPower += 15;
+                break;
+
+            case "White Ribbon":
+                WriteLine(" Defense increased by 5!");
+                defensePower += 5;
+                break;
+
+            default: // no special item
+                WriteLine();
+                break;
+        }
+    }
+
+    static void ViewStatus() // This views the player's current status
+    {
+        WriteLine("\n--- Status ---");
+        WriteLine($"Hitpoints: {hitpoints}");
+        WriteLine($"Attack Power: {attackPower}");
+        WriteLine($"Defense: {defensePower}");
+        WriteLine($"Gold: {gold}");
+
+        if (inventory.Count == 0)
+        {
+            WriteLine("Inventory: (empty)");
+        }
+        else
+        {
+            WriteLine("Inventory:");
             foreach (string item in inventory)
             {
-                Console.WriteLine("- " + item);
+                WriteLine("- " + item);
             }
         }
     }
