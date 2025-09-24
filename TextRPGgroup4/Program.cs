@@ -29,19 +29,43 @@ class Program
         {
             if (args.Length > 0) gold = int.Parse(args[0]); // this is the first argument which is the starting gold
             if (args.Length > 1) inventory.Add(args[1]); // this is the second argument which is the starting item
+
+            // If args[1] is an item from this program that's supposed to raise your attack/defense power, handle that
+            switch (args[1])
+            {
+                case "Dark Candy": // do nothing with dark candy
+                    break;
+
+                case "Spookysword": // raises attack power by 10
+                    attackPower += 10;
+                    break;
+
+                case "Twisted Sword": // raises attack power by 15
+                    attackPower += 15;
+                    break;
+
+                case "Silver Card": // raises defense power by 5
+                    defensePower += 5;
+                    break;
+
+                case "White Ribbon": // raises defense power by 10
+                    defensePower += 10;
+                    break;
+            }
         }
         catch
         {
             WriteLine("Invalid command line arguments. Using defaults.");
         }
 
-        // Start of the game / starting setup
+        // Setup starting item message based on if you started with one from the terminal
         string startingItem = "no items";
         if (args.Length > 1)
         {
-            startingItem = inventory[0];
+            startingItem = "a" + inventory[0];
         }
 
+        // Start of the game
         WriteLine("Welcome to the Dark World!");
         WriteLine("You've entered with {0} HP, {1} gold, and {2}.",
             hitpoints, gold, startingItem);
@@ -121,6 +145,18 @@ class Program
             gold -= price;
             inventory.Add(item);
             WriteLine("SEAM: Thank you, traveller!");
+
+            // handle special items
+            switch (item)
+            {
+                case "Spookysword": // spookysword raises attack power by 10
+                    attackPower += 10;
+                    break;
+
+                case "Silver Card": // silver card raises defense power by 5
+                    defensePower += 5;
+                    break;
+            }
         }
         else
         {
@@ -316,7 +352,7 @@ class Program
             WriteLine();
             WriteLine("1. Dark Candy - 25 Gold.");
             WriteLine("2. Spookysword - Raises attack power by 10 - 100 Gold.");
-            WriteLine("3. Silver Card - Raises defense power by 10 - 100 Gold.");
+            WriteLine("3. Silver Card - Raises defense power by 5 - 100 Gold.");
             WriteLine("4. Leave Shop - 0 Gold.");
 
             try
