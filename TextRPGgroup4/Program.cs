@@ -62,7 +62,7 @@ class Program
         string startingItem = "no items";
         if (args.Length > 1)
         {
-            startingItem = "a" + inventory[0];
+            startingItem = "a " + inventory[0];
         }
 
         // Start of the game
